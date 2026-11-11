@@ -267,6 +267,7 @@
   }
   .plan.selected .plan-price{ text-align: left; margin-top:2px; }
 
+  .plan-hint{ margin:16px 0 0; padding:12px 14px; border:1px solid rgba(228,192,124,0.4); background:rgba(201,161,90,0.08); border-radius:8px; font-size:13.5px; line-height:1.5; color:rgba(241,238,228,0.88); animation: fade .25s ease; }
   /* ---------- SUMMARY ---------- */
   .summary{
     background: rgba(241,238,228,0.04);
@@ -478,6 +479,9 @@
 
     </div>
 
+    <p class="plan-hint" id="hintMonthly" style="display:none;">Monthly plan: you pay today, and it renews automatically every month on the same date until you cancel. Next month's charge is a new month, not a double charge.</p>
+    <p class="plan-hint" id="hintSingle" style="display:none;">Single Practice: one-time payment. It does not renew.</p>
+
     <div class="actions">
       <button type="button" class="btn-ghost" id="backTo1">← Back</button>
       <button type="button" class="btn-primary" id="toStep3" disabled>Continue to payment →</button>
@@ -633,6 +637,8 @@
       state.unit = card.dataset.unit;
       state.stripeUrl = card.dataset.stripe;
       document.getElementById('toStep3').disabled = false;
+      document.getElementById('hintMonthly').style.display = state.unit === 'month' ? 'block' : 'none';
+      document.getElementById('hintSingle').style.display = state.unit === 'session' ? 'block' : 'none';
       if (window.ceTrack) ceTrack('select_item', { item_name: state.plan });
     });
   });
@@ -733,6 +739,7 @@
     document.getElementById('formAtleta').reset();
     document.querySelectorAll('.plan').forEach(c => c.classList.remove('selected'));
     document.getElementById('toStep3').disabled = true;
+    document.getElementById('hintMonthly').style.display = 'none'; document.getElementById('hintSingle').style.display = 'none';
     cGuardian.checked = cTerms.checked = cWaiver.checked = cMedia.checked = false; sig.value = ''; syncPay();
     state.atleta = {}; state.plan = null; state.price = null; state.refId = makeRefId();
     document.getElementById('donePlanTag').style.display = 'none';
