@@ -300,6 +300,10 @@
     margin: 4px auto 20px;
     font-size: 24px;
   }
+  .done-screen .auto-note{ text-align:left; border:2px solid var(--gold); background:rgba(201,161,90,0.1); border-radius:10px; padding:14px 18px; margin:20px 0 22px; font-size:14px; line-height:1.55; }
+  .done-screen .auto-note b{ display:block; color:var(--gold-2); font-size:16px; margin-bottom:4px; }
+  .done-screen .auto-note p{ margin:8px 0 0; color:rgba(241,238,228,0.88); }
+  .done-screen .auto-note a{ color:var(--gold-2); font-weight:700; }
   .done-screen .plan-tag{
     display:inline-block;
     margin-top: 6px;
@@ -519,6 +523,17 @@
     <h2>Registration complete</h2>
     <p class="lead" id="doneText">The athlete has been registered successfully.</p>
     <span class="plan-tag" id="donePlanTag" style="display:none;"></span>
+    <div class="auto-note" id="autoMonthly" style="display:none;">
+      <b>Your plan renews automatically next month</b>
+      <p>The payment you just made covers this month. Next month, on the same date, your plan will renew and the same card will be charged automatically. That is next month's charge, not a double charge for this one. You do not need to pay again by hand.</p>
+      <p>If you do not want the next charge, cancel before your next billing date.</p>
+      <p><a href="account.html">Create and manage your account here →</a></p>
+    </div>
+    <div class="auto-note" id="autoSingle" style="display:none;">
+      <b>This was a one-time payment</b>
+      <p>A Single Practice is paid once. You will not be charged again automatically.</p>
+      <p><a href="account.html">Create and manage your account here →</a></p>
+    </div>
     <button type="button" class="btn-primary" id="restartBtn">Register another athlete</button>
   </section>
 
@@ -571,6 +586,9 @@
         tag.style.display = 'inline-block';
       }
       document.getElementById('doneText').textContent = t('Thank you! Your payment is being confirmed. Stripe will email you a receipt.');
+      var single = /^single practice$/i.test(planName);
+      document.getElementById('autoSingle').style.display = single ? 'block' : 'none';
+      document.getElementById('autoMonthly').style.display = single ? 'none' : 'block';
       window.addEventListener('load', function(){ if (window.ceTrack) ceTrack('purchase', { currency: 'USD', items: [{ item_name: planName || 'unknown' }] }); });
       showPanel('done');
       // Limpia la URL para que un refresh no reabra la pantalla de confirmación
