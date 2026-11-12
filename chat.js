@@ -26,6 +26,7 @@ function T(){return TXT[lang()];}
 var st=document.createElement('style');
 st.textContent=
 '#ceChatBtn{position:fixed;right:14px;bottom:14px;z-index:280;background:#C9A15A;color:#0B0A0F;border:none;border-radius:28px;padding:13px 20px;font:700 14px Inter,sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.45)}'+
+'#ceChatBtn{display:flex;align-items:center;gap:8px}#ceChatBtn svg{width:20px;height:20px;flex:none}'+
 '#ceChatBtn:hover{background:#E4C07C}'+
 '#ceChat{position:fixed;right:14px;bottom:14px;z-index:285;width:min(380px,calc(100vw - 28px));height:min(560px,calc(100vh - 28px));display:none;flex-direction:column;background:#14111C;color:#F1EEE4;border:1px solid rgba(228,192,124,.45);border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.6);overflow:hidden;font:14px/1.5 Inter,sans-serif}'+
 '#ceChat.open{display:flex}'+
@@ -44,10 +45,10 @@ st.textContent=
 '#ceChat form button{background:#C9A15A;color:#0B0A0F;border:none;border-radius:8px;padding:0 16px;font:700 13.5px Inter,sans-serif;cursor:pointer}'+
 '#ceChat form button:disabled{opacity:.5;cursor:not-allowed}'+
 '#ceChat .note{padding:0 12px 10px;font-size:10.5px;color:rgba(241,238,228,.45);line-height:1.4}#ceChat .note a{color:#E4C07C}'+
-'@media (max-width:520px){#ceChatBtn{bottom:62px}#ceChat{bottom:8px;right:8px;width:calc(100vw - 16px);height:calc(100vh - 16px)}}';
+'@media (max-width:520px){#ceChatBtn{bottom:64px;right:12px;width:44px;height:44px;padding:0;justify-content:center;border-radius:50%}#ceChatBtn .lbl{display:none}#ceChatBtn svg{width:22px;height:22px}#ceChat{bottom:8px;right:8px;width:calc(100vw - 16px);height:calc(100vh - 16px)}}';
 document.head.appendChild(st);
 
-var btn=document.createElement('button');btn.id='ceChatBtn';btn.type='button';btn.setAttribute('aria-haspopup','dialog');
+var btn=document.createElement('button');btn.id='ceChatBtn';btn.type='button';btn.setAttribute('aria-haspopup','dialog');btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.5-4.6A8 8 0 1 1 21 12z"/></svg><span class="lbl"></span>';
 var box=document.createElement('div');box.id='ceChat';box.setAttribute('role','dialog');box.setAttribute('aria-label','Chat');
 box.innerHTML='<header><div><b></b><span></span></div><button type="button" id="ceChatX">&times;</button></header>'+
  '<div id="ceMsgs" aria-live="polite"></div>'+
@@ -60,7 +61,7 @@ var msgs=box.querySelector('#ceMsgs'),form=box.querySelector('#ceChatForm'),inp=
 var history=[],busy=false,started=false;
 
 function labels(){
-  var t=T();btn.textContent=t.open;
+  var t=T();btn.querySelector('.lbl').textContent=t.open;btn.setAttribute('aria-label',t.open);btn.title=t.open;
   box.querySelector('header b').textContent=t.title;box.querySelector('header span').textContent=t.sub;
   box.querySelector('#ceChatX').setAttribute('aria-label',t.close);
   inp.placeholder=t.ph;inp.setAttribute('aria-label',t.ph);send.textContent=t.send;

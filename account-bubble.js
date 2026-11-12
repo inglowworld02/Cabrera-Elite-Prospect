@@ -11,8 +11,8 @@ function lang(){
   var l=null;try{l=localStorage.getItem('ce_lang');}catch(e){}
   return l==='es'?'es':'en';
 }
-function getMin(){try{return sessionStorage.getItem('ce_acc_bubble')==='min';}catch(e){return false;}}
-function setMin(v){try{sessionStorage.setItem('ce_acc_bubble',v?'min':'');}catch(e){}}
+function getMin(){try{return localStorage.getItem('ce_acc_bubble')==='min';}catch(e){return false;}}
+function setMin(v){try{localStorage.setItem('ce_acc_bubble',v?'min':'');}catch(e){}}
 
 var st=document.createElement('style');
 st.textContent=
@@ -28,7 +28,7 @@ st.textContent=
 '#ceAcc b i{display:inline-block;font-style:normal;margin-left:2px;transition:transform .18s ease}'+
 '#ceAcc .bub:hover b i,#ceAcc .bub:focus-within b i{transform:translateX(4px)}'+
 '#ceAcc span.sub{display:block;font-size:12px;color:rgba(241,238,228,.7);margin-top:2px}'+
-'#ceAcc .x{background:none;border:none;color:rgba(241,238,228,.6);font-size:20px;line-height:1;cursor:pointer;padding:6px 10px 6px 4px}'+
+'#ceAcc .x{background:none;border:none;color:rgba(241,238,228,.7);line-height:0;cursor:pointer;padding:10px 12px 10px 6px;min-width:40px;min-height:40px;display:grid;place-items:center}'+
 '#ceAcc .x:hover{color:#F1EEE4}'+
 '#ceAcc .dot{display:none;width:48px;height:48px;border-radius:50%;border:1.5px solid #C9A15A;background:#14111C;color:#E4C07C;cursor:pointer;'+
  'box-shadow:0 8px 22px rgba(0,0,0,.5);padding:0;place-items:center;position:relative;animation:ceAccPop .3s ease both}'+
@@ -41,7 +41,7 @@ st.textContent=
 '@keyframes ceAccPop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}'+
 '@keyframes ceAccRing{0%{opacity:.8;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.6)}}'+
 '@media (prefers-reduced-motion:reduce){#ceAcc .bub,#ceAcc .dot,#ceAcc .dot::after{animation:none}#ceAcc .bub,#ceAcc b i{transition:none}}'+
-'@media (max-width:520px){#ceAcc{bottom:54px}#ceAcc .bub{max-width:calc(100vw - 130px)}}';
+'@media (max-width:520px){#ceAcc{left:10px;bottom:62px}#ceAcc .bub{max-width:calc(100vw - 84px);border-radius:14px 14px 14px 4px}#ceAcc .go{padding:8px 4px 8px 11px}#ceAcc b{font-size:12.5px}#ceAcc span.sub{font-size:11px}#ceAcc .dot{width:44px;height:44px}}';
 document.head.appendChild(st);
 
 var box=document.createElement('div');box.id='ceAcc';
@@ -49,7 +49,7 @@ var bub=document.createElement('div');bub.className='bub';
 var a=document.createElement('a');a.className='go';
 var b=document.createElement('b'),arrow=document.createElement('i'),s=document.createElement('span');s.className='sub';
 arrow.textContent='→';
-var x=document.createElement('button');x.type='button';x.className='x';x.textContent='−';
+var x=document.createElement('button');x.type='button';x.className='x';x.innerHTML='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
 var dot=document.createElement('button');dot.type='button';dot.className='dot';
 dot.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>';
 a.appendChild(b);a.appendChild(s);bub.appendChild(a);bub.appendChild(x);box.appendChild(bub);box.appendChild(dot);
