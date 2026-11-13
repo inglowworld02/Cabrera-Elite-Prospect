@@ -35,6 +35,16 @@ function mount(el){
       }catch(e){}
     });
   };
+  /* Respaldo: si la verificación invisible falla (p. ej. navegación privada de iPhone), muestra la casilla visible. */
+  h.visible=function(){
+    if(failed||!el)return false;
+    load(function(){
+      try{if(h.id!==null)window.turnstile.remove(h.id);}catch(e){}
+      try{h.id=window.turnstile.render(el,{sitekey:SITEKEY,appearance:'always',theme:'dark',size:'flexible',language:lang(),
+        callback:got,'expired-callback':function(){got('');},'error-callback':function(){got('');}});}catch(e){}
+    });
+    return true;
+  };
   /* Devuelve una promesa con el token ('' si no se pudo obtener a tiempo: el servidor decide qué hacer). */
   h.token=function(ms){
     h.ensure();

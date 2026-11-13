@@ -10,14 +10,14 @@ var TXT={
      ph:'Type your question…',send:'Send',think:'Typing…',
      err:'Sorry, I could not answer right now. Please call +1 (863) 268-9210 or email info@cabreraelite.com.',
      lim:'Too many messages for now. Please try again later or call +1 (863) 268-9210.',
-     cap:'Security check failed. Please reload the page and try again, or call +1 (863) 268-9210.',
+     cap:'Security check needed. Tap the "I am human" box below, then send your message again. If it does not appear, turn off private browsing or call +1 (863) 268-9210.',
      note:"AI replies can contain mistakes. Don't share card numbers or health details. Messages are processed by our AI provider.",priv:'Privacy Policy'},
  es:{open:'Chatea con nosotros',title:'Asistente Cabrera Elite',sub:'Asistente de IA · no es una persona',close:'Cerrar',
      hello:'¡Hola! Soy el asistente virtual de Cabrera Elite. Pregúntame por los planes, horarios, la evaluación gratis o cómo registrarte.',
      ph:'Escribe tu pregunta…',send:'Enviar',think:'Escribiendo…',
      err:'Lo siento, no pude responder ahora. Llama al +1 (863) 268-9210 o escribe a info@cabreraelite.com.',
      lim:'Demasiados mensajes por ahora. Intenta más tarde o llama al +1 (863) 268-9210.',
-     cap:'No se pudo verificar la seguridad. Recarga la página e inténtalo de nuevo, o llama al +1 (863) 268-9210.',
+     cap:'Falta la verificación de seguridad. Toca la casilla "Soy humano" de abajo y vuelve a enviar tu mensaje. Si no aparece, desactiva la navegación privada o llama al +1 (863) 268-9210.',
      note:'Las respuestas de IA pueden tener errores. No compartas números de tarjeta ni datos de salud. Los mensajes los procesa nuestro proveedor de IA.',priv:'Política de privacidad'}
 };
 function lang(){if(document.documentElement.lang==='es')return 'es';var l=null;try{l=localStorage.getItem('ce_lang');}catch(e){}return l==='es'?'es':'en';}
@@ -58,7 +58,7 @@ box.innerHTML='<header><div><b></b><span></span></div><button type="button" id="
 document.body.appendChild(btn);document.body.appendChild(box);
 
 var msgs=box.querySelector('#ceMsgs'),form=box.querySelector('#ceChatForm'),inp=box.querySelector('#ceChatIn'),send=form.querySelector('button');
-var history=[],busy=false,started=false;
+var history=[],busy=false,started=false,capShown=false;
 
 function labels(){
   var t=T();btn.querySelector('.lbl').textContent=t.open;btn.setAttribute('aria-label',t.open);btn.title=t.open;
@@ -95,12 +95,12 @@ form.addEventListener('submit',function(e){
    .then(function(r){return r.json().then(function(j){return {s:r.status,j:j};});})
    .then(function(x){
      if(x.s===429){wait.textContent=T().lim;return;}
-     if(x.s===403){wait.textContent=T().cap;return;}
+     if(x.s===403){wait.textContent=T().cap;if(cap&&cap.visible)cap.visible();capShown=true;history.pop();inp.value=text;return;}
      if(x.s!==200||!x.j.reply){wait.textContent=T().err;return;}
      wait.textContent=x.j.reply;history.push({role:'assistant',content:x.j.reply});
    })
    .catch(function(){wait.textContent=T().err;})
-   .then(function(){clearTimeout(to);resetCap();busy=false;send.disabled=false;msgs.scrollTop=msgs.scrollHeight;inp.focus();});
+   .then(function(){clearTimeout(to);if(capShown){capShown=false;}else{resetCap();}busy=false;send.disabled=false;msgs.scrollTop=msgs.scrollHeight;inp.focus();});
   });
 });
 labels();
