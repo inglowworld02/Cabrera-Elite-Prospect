@@ -1,7 +1,7 @@
 /* Error monitoring (Sentry). Lightweight: no third-party script, no cookies, no personal data.
    Sends only: error message, file/line, page path and language. Form contents are NEVER sent. */
 (function(){
-  var KEY = '4ea96d989bc8b131edd4215faa49746e', ORG = 'o4512422053281792', PROJ = '4512429059604480';
+  var KEY = 'de64b7ccb84a4346139ca5cacb495a00', ORG = 'o4512429115179008', PROJ = '4512430903197696';
   var URL = 'https://' + ORG + '.ingest.us.sentry.io/api/' + PROJ + '/envelope/?sentry_key=' + KEY + '&sentry_version=7';
   var sent = 0, seen = {};
   function id(){ var s=''; for(var i=0;i<32;i++) s += Math.floor(Math.random()*16).toString(16); return s; }
