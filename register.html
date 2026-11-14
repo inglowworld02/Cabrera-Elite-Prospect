@@ -9,7 +9,7 @@
 
 <meta charset="UTF-8">
 <!--ce:head-->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cabrera-elite-chat.elvisjunior090912.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cabrera-elite-chat.elvisjunior090912.workers.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://challenges.cloudflare.com https://*.ingest.us.sentry.io; frame-src https://challenges.cloudflare.com; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#0B0A0F">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -695,7 +695,7 @@
     const to = setTimeout(() => ctrl.abort(), 8000);
     return fetch(GSHEET_URL, { method:'POST', mode:'no-cors', body:fd, signal:ctrl.signal })
       .finally(() => clearTimeout(to))
-      .catch(() => retries > 0 ? postSheet(fd, retries - 1) : null);
+      .catch(() => { if (retries > 0) return postSheet(fd, retries - 1); if (window.ceReport) ceReport('SheetPostFailed', 'registration POST to Apps Script failed after retries'); return null; });
   }
 
   document.getElementById('payBtn').addEventListener('click', () => {
@@ -752,6 +752,7 @@
 <script src="lang.js"></script>
 <script src="account-bubble.js"></script>
 <script src="cookies.js"></script>
+<script src="sentry-init.js"></script>
 <script src="track.js"></script>
 </body>
 </html>
