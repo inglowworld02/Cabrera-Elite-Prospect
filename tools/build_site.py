@@ -53,7 +53,7 @@ CSP = "; ".join([
     "img-src 'self' data: https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com",
     "font-src 'self'",
     f"connect-src 'self' https://script.google.com https://script.googleusercontent.com {CHAT_HOST} "
-    "https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://challenges.cloudflare.com",
+    "https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://challenges.cloudflare.com https://*.ingest.us.sentry.io",
     "frame-src https://challenges.cloudflare.com",
     "media-src 'self'",
     "object-src 'none'",
