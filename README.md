@@ -168,7 +168,7 @@ curl -L -X POST "URL_DEL_SCRIPT" \
 ```
 (usa una referencia real de una fila de prueba; debe responder `ok` y la fila pasa a `Pagado`).
 
-Cada evento envía un correo de aviso a `cabreraeliteprospect@gmail.com`.
+Cada evento envía un correo de aviso al correo del negocio configurado en el script.
 
 ## 4. Versiones de documentos legales
 `terms.html`, `register.html`, `index.html` y `waiver.html` comparten la versión (`2026-10-09d`). Si cambias los textos legales, sube la versión en: `terms.html` (2 lugares), `register.html` (`TERMS_VERSION`, `WAIVER_VERSION`, `PRIVACY_VERSION`), `index.html` (`EVAL_WAIVER_V`, `EVAL_PRIVACY_V`) y `waiver.html` (`WAIVER_V`, `PRIVACY_V`).
