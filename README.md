@@ -26,7 +26,6 @@
 - [3. Make](#3-make-escenario-stripe--sheets)
 - [4. Versiones de documentos legales](#4-versiones-de-documentos-legales)
 - [5. Revisión final antes de cobrar](#5-revisión-final-antes-de-cobrar-verificado-en-stripe-el-2026-10-10)
-- [6. Pendiente de revisión](#6-pendiente-de-revisión)
 
 ## Vista previa
 
@@ -178,8 +177,3 @@ Cada evento envía un correo de aviso a `cabreraeliteprospect@gmail.com`.
 - Payment Links en vivo con precios correctos ($50 / $280 / $400 / $600), redirección `register.html?pago=ok&plan=...` correcta e impuestos automáticos activos.
 - Portal del cliente activo: cancelación al final del período y enlace igual al de `lang.js`. "Cambiar de plan" está desactivado, así que la ruta *plan_changed* de Make NO es necesaria.
 - Pendiente en Stripe: poner las URL de Términos y Privacidad (`https://cabreraelite.com/terms.html` y `...#privacy`) en Configuración → Detalles públicos y en el portal (hoy están vacías); los Payment Links exigen aceptar términos.
-
-## 6. Pendiente de revisión
-- Un abogado de Florida debe revisar `terms.html` (secciones 1, 3 y 4), incluido el waiver de menores (s. 744.301(3) F.S.) y ahora su uso en la evaluación gratis.
-- Los nombres de archivo en GitHub Pages distinguen mayúsculas y minúsculas: `images/Logo.jpg` no es lo mismo que `images/logo.jpg`.
-- Mantener la hoja de Google con acceso restringido (contiene datos de menores). Ya está restringida.
