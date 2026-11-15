@@ -1,8 +1,67 @@
+<div align="center">
+
+<img src="images/logo.jpg" alt="Cabrera Elite Baseball Development" width="120">
+
 # Cabrera Elite Baseball Development
 
-Sitio web (GitHub Pages, dominio `cabreraelite.com`) + registro de atletas, evaluaciones gratis y confirmación de pagos.
+**Programa de entrenamiento diario de béisbol en Poinciana, FL — sitio web, registro de atletas y pagos.**
+
+[![Sitio](https://img.shields.io/badge/sitio-cabreraelite.com-C9A45C?style=for-the-badge)](https://cabreraelite.com)
+[![GitHub Pages](https://img.shields.io/badge/hosting-GitHub%20Pages-222?style=for-the-badge&logo=github)](https://pages.github.com)
+[![Cloudflare](https://img.shields.io/badge/CDN%20y%20seguridad-Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://www.cloudflare.com)
+[![Stripe](https://img.shields.io/badge/pagos-Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com)
+[![Idiomas](https://img.shields.io/badge/idiomas-EN%20%7C%20ES-4c1?style=for-the-badge)](#)
+
+<img src="docs/img/home-desktop.jpg" alt="Portada de cabreraelite.com en computadora" width="860">
+
+</div>
+
+## Contenido
+
+- [Vista previa](#vista-previa)
+- [Tecnologías](#tecnologías)
+- [Cómo funciona](#cómo-funciona)
+- [1. Google Apps Script](#1-google-apps-script-codegs)
+- [2. Stripe](#2-stripe)
+- [3. Make](#3-make-escenario-stripe--sheets)
+- [4. Versiones de documentos legales](#4-versiones-de-documentos-legales)
+- [5. Revisión final antes de cobrar](#5-revisión-final-antes-de-cobrar-verificado-en-stripe-el-2026-10-10)
+- [6. Pendiente de revisión](#6-pendiente-de-revisión)
+
+## Vista previa
+
+| Celular | Registro (paso 1 de 3) | Mi cuenta |
+|:---:|:---:|:---:|
+| <img src="docs/img/home-mobile.jpg" alt="Portada en celular" width="200"> | <img src="docs/img/register-desktop.jpg" alt="Formulario de registro de atleta" width="360"> | <img src="docs/img/account-mobile.jpg" alt="Página Mi cuenta" width="200"> |
+
+> Las capturas muestran solo la interfaz; no incluyen fotos de atletas ni datos de familias.
+
+## Tecnologías
+
+| Área | Qué se usa |
+|---|---|
+| Sitio | HTML, CSS y JavaScript estáticos, bilingüe EN/ES (`es/` se genera con `tools/build_site.py`) |
+| Hosting | GitHub Pages con dominio propio |
+| Seguridad | Cloudflare (DNS, HTTPS, HSTS, Turnstile, límites por IP), CSP en cada página |
+| Pagos | Stripe Checkout / Payment Links y Portal del cliente |
+| Automatización | Make (webhook de Stripe) → Google Apps Script → Google Sheets |
+| Chat | Cloudflare Worker con Workers AI (`chat-worker/`) |
+| Monitoreo | Sentry (errores y disponibilidad) con `sentry-init.js`, sin cookies ni datos personales |
 
 ## Cómo funciona
+
+```mermaid
+flowchart LR
+    A[Familia en cabreraelite.com] -->|registro / evaluación| B[Google Apps Script]
+    B --> C[(Google Sheets)]
+    A -->|pago| D[Stripe]
+    D -->|webhook| E[Make]
+    E -->|paid / failed / canceled| B
+    B -->|correos de aviso| F[Familia y equipo]
+    A -. errores .-> G[Sentry]
+```
+
+### Detalle
 
 ```
 Web (index.html / register.html)
@@ -25,6 +84,7 @@ Make  ◄── eventos de Stripe             • "Pagos sin registro": pagos qu
 | `robots.txt`, `sitemap.xml` | SEO básico (subir a la raíz del repo) |
 | `GUIA_SITIO.md` | Guía en español: seguridad, video, tienda, calendario, correo y cómo mantener el sitio |
 | `tools/build_site.py` | Genera las páginas en español (`es/`), el sitemap y los bloques de seguridad |
+| `sentry-init.js` | Reporta errores del sitio a Sentry (sin datos personales) |
 | `site-config.js` | Único archivo que se edita para video, horario, reservas, tienda, testimonios, etc. |
 | `Code.gs` | **No se sube a GitHub.** Se pega en Google Apps Script (ver abajo) |
 
