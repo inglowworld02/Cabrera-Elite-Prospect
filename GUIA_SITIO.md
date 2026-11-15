@@ -58,7 +58,7 @@ Dos formas de cobrar:
 Antes de abrir: define política de envíos/retiro y cambios de talla, y revisa con tu abogado que "ventas finales" aplique también a la tienda. Cuando tengas productos, quita `store.html` de `NOINDEX_TWINS` en `tools/build_site.py` para que Google lo indexe.
 
 ## 9. Verificación en dos pasos (cuentas) **[TÚ]**
-Revisa que cada una la tenga activa: Google (cabreraeliteprospect@gmail.com y cabreraeliteinfo@gmail.com), Cloudflare (elvisjunior090912@gmail.com), Stripe, Make, GitHub. Mejor con app autenticadora o llave de acceso que con SMS. Guarda los códigos de respaldo fuera del celular.
+Revisa que cada una la tenga activa: Google (todas las cuentas del negocio), Cloudflare, Stripe, Make, GitHub. Mejor con app autenticadora o llave de acceso que con SMS. Guarda los códigos de respaldo fuera del celular.
 
 ## 10. Si algún día cambias de cuenta de Cloudflare
 Crea el Worker nuevo (pega `chat-worker/worker.js`, binding Workers AI = `AI`, KV `RATE`, secreto `TURNSTILE_SECRET`), crea el widget nuevo de Turnstile, y cambia en el código: `CHAT_URL` (`chat.js`), `SITEKEY` (`antibot.js`) y `CHAT_HOST` (`tools/build_site.py`). Ejecuta `python3 tools/build_site.py` y sube a GitHub.
