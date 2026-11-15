@@ -176,4 +176,3 @@ Cada evento envía un correo de aviso a `cabreraeliteprospect@gmail.com`.
 ## 5. Revisión final antes de cobrar (verificado en Stripe el 2026-10-10)
 - Payment Links en vivo con precios correctos ($50 / $280 / $400 / $600), redirección `register.html?pago=ok&plan=...` correcta e impuestos automáticos activos.
 - Portal del cliente activo: cancelación al final del período y enlace igual al de `lang.js`. "Cambiar de plan" está desactivado, así que la ruta *plan_changed* de Make NO es necesaria.
-- Pendiente en Stripe: poner las URL de Términos y Privacidad (`https://cabreraelite.com/terms.html` y `...#privacy`) en Configuración → Detalles públicos y en el portal (hoy están vacías); los Payment Links exigen aceptar términos.
