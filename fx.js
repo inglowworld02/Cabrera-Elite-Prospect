@@ -25,7 +25,7 @@
     if(seen.has(el)||el.closest('.hero'))return;seen.add(el);
     el.classList.add('rv');
     var sib=el.parentElement?Array.prototype.indexOf.call(el.parentElement.children,el):0;
-    el.style.setProperty('--d',Math.min(sib%6,5)*.08+'s');
+    el.style.setProperty('--d',Math.min(sib%6,5)*.05+'s');
   });
   if(!('IntersectionObserver' in window)){d.querySelectorAll('.rv').forEach(function(e){e.classList.add('in')});return}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){

@@ -43,12 +43,16 @@ var box;
 function build(){
   if(box)return;
   var st=document.createElement('style');
-  st.textContent='#ceCookie{position:fixed;left:14px;right:14px;bottom:60px;z-index:290;max-width:520px;background:#14111C;color:#F1EEE4;border:1px solid rgba(228,192,124,.45);border-radius:12px;padding:16px 18px;font:13.5px/1.55 Inter,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.5)}'+
-  '#ceCookie b{display:block;font:400 20px "Bebas Neue",Impact,"Arial Narrow",sans-serif;letter-spacing:.5px;color:#E4C07C;margin-bottom:4px}'+
-  '#ceCookie p{margin:0 0 12px;color:rgba(241,238,228,.8)}#ceCookie a{color:#E4C07C}'+
-  '#ceCookie .row{display:flex;gap:10px;flex-wrap:wrap}'+
-  '#ceCookie button{font:700 13.5px Inter,sans-serif;border-radius:7px;padding:10px 18px;cursor:pointer;border:1.5px solid rgba(241,238,228,.35);background:transparent;color:#F1EEE4}'+
-  '#ceCookie button.ok{background:#C9A15A;border-color:#C9A15A;color:#0B0A0F}';
+  /* Barra compacta abajo: ya no tapa los botones del hero (mismo texto y mismos botones). */
+  st.textContent='#ceCookie{position:fixed;left:76px;right:14px;bottom:14px;z-index:290;max-width:720px;display:grid;grid-template-columns:1fr auto;column-gap:20px;align-items:center;background:#14111C;color:#F1EEE4;border:1px solid rgba(228,192,124,.45);border-radius:12px;padding:12px 16px;font:13px/1.5 Inter,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.5);text-wrap:pretty}'+
+  '#ceCookie b{grid-column:1;display:block;font:400 18px "Bebas Neue",Impact,"Arial Narrow",sans-serif;letter-spacing:.5px;color:#E4C07C;margin-bottom:2px}'+
+  '#ceCookie p{grid-column:1;margin:0;color:rgba(241,238,228,.8)}#ceCookie a{color:#E4C07C}'+
+  '#ceCookie .row{grid-column:2;grid-row:1 / span 2;display:flex;gap:10px}'+
+  '#ceCookie button{font:700 13.5px Inter,sans-serif;border-radius:7px;padding:0 18px;min-height:44px;cursor:pointer;border:1.5px solid rgba(241,238,228,.35);background:transparent;color:#F1EEE4;transition:background-color .15s,border-color .15s,transform .15s cubic-bezier(.22,1,.36,1)}'+
+  '#ceCookie button:active{transform:scale(.96)}'+
+  '#ceCookie button.ok{background:#C9A15A;border-color:#C9A15A;color:#0B0A0F}'+
+  '@media (max-width:640px){#ceCookie{left:8px;right:8px;bottom:56px;grid-template-columns:1fr;padding:10px 12px;font-size:12px;line-height:1.4}#ceCookie b{font-size:16px;margin-bottom:0}#ceCookie .row{grid-column:1;grid-row:auto;margin-top:8px}#ceCookie button{flex:1;min-height:40px;padding:0 12px}}'+
+  '@media (prefers-reduced-motion:reduce){#ceCookie button{transition:none}}';
   document.head.appendChild(st);
   box=document.createElement('div');box.id='ceCookie';box.setAttribute('role','dialog');box.setAttribute('aria-live','polite');
   box.innerHTML='<b></b><p></p><div class="row"><button class="ok" data-v="accepted"></button><button data-v="declined"></button></div>';

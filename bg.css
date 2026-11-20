@@ -18,7 +18,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 @keyframes ceLights{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-1.5%,1%,0) scale(1.06)}}
 @media (prefers-reduced-motion:reduce){body::before{animation:none}}
 /* secciones translúcidas para que se vea el fondo */
-.team,.about,.plans-sec,.location,.free-eval{background-color:rgba(10,8,16,.52)!important;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.team,.about,.plans-sec,.location,.free-eval{background-color:rgba(10,8,16,.52)!important}
 .hero{background-color:transparent!important}
 @media print{body::before,body::after{display:none}}
 
@@ -49,16 +49,19 @@ h1.hero-title{background:linear-gradient(180deg,#fff 30%,#e4c07c 120%);-webkit-b
 .plate-shape::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);transform:translateX(-120%);animation:ceShine 5.5s ease-in-out infinite}
 @keyframes ceShine{0%,55%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
 /* botones */
-.btn,.plan-cta,.nav-cta{position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,background .25s,border-color .25s}
+.btn,.plan-cta,.nav-cta{position:relative;overflow:hidden;transition:transform .25s var(--ce-ease),box-shadow .25s var(--ce-ease),background-color .25s,border-color .25s,color .25s}
 .btn:hover,.plan-cta:hover,.nav-cta:hover{transform:translateY(-2px)}
+.btn:active,.plan-cta:active,.nav-cta:active{transform:scale(.96);transition-duration:.1s}
 .btn-gold:hover{box-shadow:0 10px 28px rgba(228,192,124,.35)}
-.btn-gold::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:ceBtn 4.5s ease-in-out infinite}
-@keyframes ceBtn{0%,60%{left:-70%}100%{left:130%}}
+/* el brillo del botón dorado ahora corre una vez al pasar el cursor (antes giraba sin parar) */
+.btn-gold::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);pointer-events:none}
+.btn-gold:hover::after{animation:ceBtn .8s var(--ce-ease) 1}
+@keyframes ceBtn{from{left:-70%}to{left:130%}}
 /* tarjetas de vidrio */
 .plan-card,.program,.player,.trust .wrap>div,.faq details{
-  background-color:rgba(255,255,255,.045)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,.09);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
-.plan-card:hover,.program:hover,.player:hover{transform:translateY(-6px);border-color:rgba(228,192,124,.55);box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 28px rgba(228,192,124,.12)}
+  background-color:rgba(255,255,255,.045)!important;
+  border:1px solid rgba(255,255,255,.09);transition:transform .25s var(--ce-ease),box-shadow .25s var(--ce-ease),border-color .25s}
+.plan-card:hover,.program:hover,.player:hover{transform:translateY(-4px);border-color:rgba(228,192,124,.55);box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 28px rgba(228,192,124,.12)}
 .plan-card.feature{border-color:rgba(228,192,124,.6);box-shadow:0 0 36px rgba(228,192,124,.12)}
 .player .photo-box img,.team img{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 .player:hover .photo-box img{transform:scale(1.07)}
@@ -68,9 +71,11 @@ h1.hero-title{background:linear-gradient(180deg,#fff 30%,#e4c07c 120%);-webkit-b
 .section-head h2::after{content:"";display:block;height:3px;width:0;margin-top:12px;background:linear-gradient(90deg,var(--gold),transparent);transition:width 1s .2s cubic-bezier(.2,.8,.2,1)}
 .section-head.in h2::after{width:84px}
 /* reveals (solo si hay JS) */
-.js-fx .rv{opacity:0;transform:translateY(34px) scale(.985);filter:blur(6px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1),filter .9s;transition-delay:var(--d,0s)}
-.js-fx .rv.in{opacity:1;transform:none;filter:none}
-.js-fx .hl{opacity:0;transform:translateY(40px);animation:ceUp 1s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0s)}
+.js-fx .rv{opacity:0;transform:translateY(16px);filter:blur(3px);transition:opacity .5s var(--ce-ease),transform .5s var(--ce-ease),filter .5s var(--ce-ease);transition-delay:var(--d,0s)}
+/* una vez revelado, el hover de las tarjetas responde al instante (sin heredar el retraso del reveal) */
+.js-fx .rv.in{opacity:1;transform:none;filter:none;transition:opacity .5s var(--ce-ease),transform .25s var(--ce-ease),filter .5s var(--ce-ease),box-shadow .25s var(--ce-ease),border-color .25s;transition-delay:0s}
+.js-fx .rv.in:hover{transition-delay:0s}
+.js-fx .hl{opacity:0;transform:translateY(20px);animation:ceUp .8s var(--ce-ease) forwards;animation-delay:var(--d,0s)}
 @keyframes ceUp{to{opacity:1;transform:none}}
 @media (hover:none){.plan-card:hover,.program:hover,.player:hover{transform:none}}
 @media (max-width:760px){.plan-card,.program,.player,.trust .wrap>div,.faq details{backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -85,3 +90,27 @@ h1.hero-title{background:linear-gradient(180deg,#fff 30%,#e4c07c 120%);-webkit-b
 body{animation:cePageIn .6s ease-out both}
 html.ce-leaving body{opacity:0;transition:opacity .38s ease-in;pointer-events:none}
 @media (prefers-reduced-motion:reduce){body{animation:none}html.ce-leaving body{opacity:1;transition:none}}
+
+/* ===== Pulido de detalles (rama design/elite-polish) — solo estilo; no cambia contenido, precios ni textos ===== */
+:root{--ce-ease:cubic-bezier(.22,1,.36,1);color-scheme:dark}
+/* superficies del navegador con la paleta de la marca */
+::selection{background:rgba(228,192,124,.35);color:#fff}
+html{scrollbar-color:#5B3A96 #0B0A0F}
+input,select,textarea{accent-color:#C9A15A;caret-color:#E4C07C}
+/* el "levantar" de las tarjetas ya reveladas (antes lo anulaba .rv.in) */
+.js-fx .plan-card.rv.in:hover,.js-fx .program.rv.in:hover,.js-fx .player.rv.in:hover{transform:translateY(-4px)}
+@media (hover:none){.js-fx .plan-card.rv.in:hover,.js-fx .program.rv.in:hover,.js-fx .player.rv.in:hover{transform:none}}
+/* tipografía: títulos balanceados, párrafos sin viudas, cifras con ancho fijo */
+h1,h2,h3,.display{text-wrap:balance}
+p,li,.lead{text-wrap:pretty}
+.trust b,.fact .n,.plan-price,.plan-days,.plate-shape *{font-variant-numeric:tabular-nums}
+/* fotos con contorno sutil (blanco al 10% sobre fondo oscuro) */
+.player .photo-box img,.team img{outline:1px solid rgba(255,255,255,.1);outline-offset:-1px}
+/* texto secundario que era demasiado pequeño / tenue en las tarjetas de jugadores */
+.player .porg{font-size:11px;color:rgba(241,238,228,.64)}
+.player .achv-tag{font-size:10.5px}
+/* áreas táctiles: mínimo 40px en controles de navegación */
+.nav-cta{display:inline-flex;align-items:center;min-height:40px}
+@media (max-width:760px){.nav-links a{padding:12px 0}}
+/* el escudo del hero no domina el primer pantallazo en móvil */
+@media (max-width:860px){.plate-shape{width:min(240px,64vw)}}
