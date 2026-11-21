@@ -35,7 +35,7 @@ function apply(){
   document.title=lang==='es'&&ES[document.documentElement.dataset.t]?ES[document.documentElement.dataset.t]:document.documentElement.dataset.t;
   btn.textContent=lang==='es'?'EN':'ES';
   document.querySelectorAll('a[href*="terms.html#"]').forEach(function(a){
-    if(!a.dataset.h)a.dataset.h=a.getAttribute('href');
+    if(!a.dataset.h)a.dataset.h=a.getAttribute('href').replace(/-es$/,'');
     a.setAttribute('href',lang==='es'?a.dataset.h+'-es':a.dataset.h);});
   if(document.querySelector('.es h2')&&location.hash){
     var h=location.hash.slice(1).replace(/-es$/,''),el=document.getElementById(lang==='es'?h+'-es':h);

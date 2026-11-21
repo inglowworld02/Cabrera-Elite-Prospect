@@ -114,3 +114,14 @@ p,li,.lead{text-wrap:pretty}
 @media (max-width:760px){.nav-links a{padding:12px 0}}
 /* el escudo del hero no domina el primer pantallazo en móvil */
 @media (max-width:860px){.plate-shape{width:min(240px,64vw)}}
+
+/* ===== Navegación entre páginas con View Transitions (mejora progresiva: solo navegadores que lo soportan) ===== */
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root){animation:ceVtOut .18s var(--ce-ease) both}
+  ::view-transition-new(root){animation:ceVtIn .28s var(--ce-ease) both}
+}
+@keyframes ceVtOut{to{opacity:0}}
+@keyframes ceVtIn{from{opacity:0}}
+main{display:block}
+.skip-link:focus-visible{outline:2px solid #fff;outline-offset:2px}
