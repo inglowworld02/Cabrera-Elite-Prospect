@@ -1171,6 +1171,7 @@
         cap.reset();
         msg.className = 'eval-msg ok';
         msg.textContent = T('Thank you! We received your request and will contact you soon to schedule the evaluation.');
+        if(window.ceAfterEval) ceAfterEval(msg);
         form.reset(); updateMinor(); btn.textContent = T('Send request →'); btn.disabled = false;
         if(window.gtag) gtag('event', 'generate_lead', { form: 'free_evaluation' });
       }).catch(function(){

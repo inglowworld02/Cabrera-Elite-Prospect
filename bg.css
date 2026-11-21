@@ -125,3 +125,18 @@ p,li,.lead{text-wrap:pretty}
 @keyframes ceVtIn{from{opacity:0}}
 main{display:block}
 .skip-link:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+/* ===== WhatsApp por plan, reserva tras enviar y sugerencia de idioma ===== */
+.plan-wa{display:block;text-align:center;margin-top:6px;padding:10px 0;font-size:13px;color:#A9A4B5;text-decoration:underline;text-underline-offset:3px;transition:color .2s}
+.plan-wa:hover{color:#E4C07C}
+.eval-next{margin-top:16px;padding:16px;border:1px solid rgba(228,192,124,.45);border-radius:10px;background:rgba(228,192,124,.06)}
+.eval-next p{margin:0 0 12px;font-weight:600}
+.eval-next-row{display:flex;gap:10px;flex-wrap:wrap}
+.eval-next-row .btn{flex:1 1 180px;text-align:center}
+.eval-next-row .btn-outline{border:1.5px solid rgba(241,238,228,.4)}
+.es-hint{position:fixed;right:14px;top:120px;z-index:295;max-width:min(340px,calc(100vw - 28px));display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;background:#14111C;color:#F1EEE4;border:1px solid rgba(228,192,124,.45);border-radius:12px;padding:12px 14px;font:13px/1.4 Inter,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.es-hint span{flex:1 1 100%}
+.es-hint button{font:700 13px Inter,sans-serif;min-height:40px;padding:0 14px;border-radius:7px;cursor:pointer;border:1.5px solid rgba(241,238,228,.35);background:transparent;color:#F1EEE4;transition:transform .15s var(--ce-ease),background-color .15s}
+.es-hint button:active{transform:scale(.96)}
+.es-hint .es-hint-yes{background:#C9A15A;border-color:#C9A15A;color:#0B0A0F}
+@media (max-width:640px){.es-hint{left:8px;right:8px;max-width:none}}

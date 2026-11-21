@@ -216,3 +216,78 @@
   window.addEventListener('langchange', function(){ render(); renderVideo(); renderSchedule(); renderStore(); });
   render(); renderVideo(); renderSchedule(); renderStore();
 })();
+
+/* ---------- Conversión: reserva tras enviar, WhatsApp por plan, sugerencia de español ----------
+   Solo agrega enlaces y avisos. No cambia precios, textos legales ni el formulario. */
+(function(){
+  var C = window.CE_CONFIG || {};
+  var WA = '18632689210';
+  function isEs(){ return document.documentElement.lang==='es' || /^\/es(\/|$)/.test(location.pathname); }
+  function safeUrl(u){ return /^https:\/\//i.test(u||''); }
+  function waUrl(text){ return 'https://api.whatsapp.com/send?phone='+WA+'&text='+encodeURIComponent(text); }
+
+  // 1) WhatsApp en cada plan, con el nombre del plan en el mensaje
+  function planWa(){
+    document.querySelectorAll('.plan-card').forEach(function(card){
+      var cta=card.querySelector('.plan-cta'); if(!cta || card.querySelector('.plan-wa')) return;
+      var a=document.createElement('a'); a.className='plan-wa'; a.target='_blank'; a.rel='noopener';
+      cta.insertAdjacentElement('afterend', a);
+    });
+    refreshPlanWa();
+  }
+  function refreshPlanWa(){
+    var es=isEs();
+    document.querySelectorAll('.plan-wa').forEach(function(a){
+      var n=a.closest('.plan-card').querySelector('.plan-name'); var p=n?n.textContent.trim():'';
+      a.textContent = es ? '¿Dudas? Pregunta por WhatsApp' : 'Questions? Ask on WhatsApp';
+      a.href = waUrl(es ? 'Hola, me interesa el plan "'+p+'". ¿Me pueden dar más información?'
+                        : 'Hi, I am interested in the "'+p+'" plan. Can you share more details?');
+    });
+  }
+
+  // 2) Después de enviar la evaluación: elegir día/hora o confirmar por WhatsApp
+  window.ceAfterEval = function(msgEl){
+    if(!msgEl || !msgEl.parentNode) return;
+    var old=document.getElementById('evNext'); if(old) old.remove();
+    var es=isEs(), box=document.createElement('div'); box.id='evNext'; box.className='eval-next';
+    var p=document.createElement('p'); p.textContent = es ? '¿Quieres reservar un día ahora mismo?' : 'Want to lock in a day right now?';
+    box.appendChild(p);
+    var row=document.createElement('div'); row.className='eval-next-row';
+    if(safeUrl(C.bookingUrl)){
+      var b=document.createElement('a'); b.className='btn btn-gold'; b.href=C.bookingUrl; b.target='_blank'; b.rel='noopener';
+      b.textContent = es ? 'Elegir día y hora →' : 'Pick a day and time →'; row.appendChild(b);
+    }
+    var w=document.createElement('a'); w.className='btn btn-outline'; w.target='_blank'; w.rel='noopener';
+    w.href = waUrl(es ? 'Hola, acabo de pedir la evaluación gratis en la página. Quiero confirmar el horario.'
+                      : 'Hi, I just requested the free evaluation on the website. I would like to confirm a time.');
+    w.textContent = es ? 'Confirmar por WhatsApp' : 'Confirm on WhatsApp'; row.appendChild(w);
+    box.appendChild(row); msgEl.insertAdjacentElement('afterend', box);
+  };
+
+  // 3) Sugerir español (sin redirigir) si el navegador está en español y la persona aún no eligió idioma
+  function esHint(){
+    if(isEs()) return;
+    var nav=(navigator.languages&&navigator.languages[0])||navigator.language||''; if(!/^es(\b|-)/i.test(nav)) return;
+    try{ if(localStorage.getItem('ce_lang')||localStorage.getItem('ce_es_hint')) return; }catch(e){ return; }
+    var tries=0, t=setInterval(function(){
+      tries++;
+      var ck=document.getElementById('ceCookie');
+      var cookie=ck && ck.offsetParent!==null ? ck : null;   // solo cuenta si se ve
+      if(cookie && tries<40) return;                       // espera a que decida las cookies
+      clearInterval(t); if(cookie) return;
+      var toggle=[].slice.call(document.querySelectorAll('button')).filter(function(b){ return b.textContent.trim()==='ES'; })[0];
+      if(!toggle || document.getElementById('esHint')) return;
+      var d=document.createElement('div'); d.id='esHint'; d.className='es-hint'; d.setAttribute('role','region'); d.setAttribute('aria-label','Idioma'); d.lang='es';
+      var s=document.createElement('span'); s.textContent='¿Prefieres ver el sitio en español?';
+      var y=document.createElement('button'); y.type='button'; y.className='es-hint-yes'; y.textContent='Ver en español';
+      var n=document.createElement('button'); n.type='button'; n.className='es-hint-no'; n.textContent='No, gracias';
+      var nv=document.querySelector('nav.top'); d.style.top=((nv?Math.round(nv.getBoundingClientRect().bottom):110)+10)+'px';   // debajo de la barra de navegación
+      y.addEventListener('click', function(){ toggle.click(); });
+      n.addEventListener('click', function(){ try{ localStorage.setItem('ce_es_hint','1'); }catch(e){} d.remove(); });
+      d.appendChild(s); d.appendChild(y); d.appendChild(n); document.body.appendChild(d);
+    }, 1500);
+  }
+
+  window.addEventListener('langchange', refreshPlanWa);
+  planWa(); esHint();
+})();
