@@ -1,0 +1,20 @@
+# Cabrera Elite Baseball Development
+
+> Daily baseball training program in Poinciana, Florida, led by a former Colorado Rockies scout. Hitting, pitching, defense and the mental game for athletes ages 7 and older. English and Spanish.
+
+Website: https://cabreraelite.com/
+Spanish version: https://cabreraelite.com/es/
+Training hours: Monday to Friday, 4:30 - 6:30 pm. Days are scheduled with the coaching staff.
+First evaluation: free for every new athlete. Request it at https://cabreraelite.com/#free-evaluation
+Phone / WhatsApp: +1 (863) 268-9210
+Email: info@cabreraelite.com
+
+## Pages
+- [Home, programs, plans and FAQ](https://cabreraelite.com/)
+- [Athlete registration](https://cabreraelite.com/register.html)
+- [Support](https://cabreraelite.com/support.html)
+- [Terms and privacy](https://cabreraelite.com/terms.html)
+
+## Notes
+- Athletes under 18 must be registered by a parent or legal guardian.
+- Current plan prices are shown on the home page; use that page as the source of truth.
