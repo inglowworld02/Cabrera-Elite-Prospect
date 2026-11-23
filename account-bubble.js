@@ -11,7 +11,13 @@ function lang(){
   var l=null;try{l=localStorage.getItem('ce_lang');}catch(e){}
   return l==='es'?'es':'en';
 }
-function getMin(){try{return localStorage.getItem('ce_acc_bubble')==='min';}catch(e){return false;}}
+/* The open bubble covers the hero links (bottom-left), so it starts as the small round button
+   unless the visitor already chose (stored value 'min' or '' = opened on purpose). */
+function getMin(){
+  var v=null;try{v=localStorage.getItem('ce_acc_bubble');}catch(e){}
+  if(v===null)return true;
+  return v==='min';
+}
 function setMin(v){try{localStorage.setItem('ce_acc_bubble',v?'min':'');}catch(e){}}
 
 var st=document.createElement('style');
