@@ -41,6 +41,8 @@ st.textContent=
 '@keyframes ceAccPop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}'+
 '@keyframes ceAccRing{0%{opacity:.8;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.6)}}'+
 '@media (prefers-reduced-motion:reduce){#ceAcc .bub,#ceAcc .dot,#ceAcc .dot::after{animation:none}#ceAcc .bub,#ceAcc b i{transition:none}}'+
+/* mientras el aviso de cookies está abierto, la burbuja se oculta para no quedar tapada */
+'body:has(#ceCookie[style*="display: block"]) #ceAcc{visibility:hidden}'+
 '@media (max-width:520px){#ceAcc{left:10px;bottom:62px}#ceAcc .bub{max-width:calc(100vw - 84px);border-radius:14px 14px 14px 4px}#ceAcc .go{padding:8px 4px 8px 11px}#ceAcc b{font-size:12.5px}#ceAcc span.sub{font-size:11px}#ceAcc .dot{width:44px;height:44px}}';
 document.head.appendChild(st);
 
