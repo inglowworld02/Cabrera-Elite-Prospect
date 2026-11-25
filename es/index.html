@@ -236,6 +236,11 @@
     border-radius: 6px;
     padding: 28px 26px;
   }
+  .lead-card{ transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+  .lead-card:hover{ transform: translateY(-4px); border-color: rgba(212,175,55,.55); box-shadow: 0 14px 34px rgba(0,0,0,.35); }
+  .chips{ display:flex; gap:8px; flex-wrap:wrap; margin:0 0 16px; }
+  .chips span{ font-size:11.5px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color: var(--gold-2); border:1px solid rgba(212,175,55,.4); border-radius:999px; padding:5px 11px; }
+  @media (prefers-reduced-motion: reduce){ .lead-card{ transition:none; } .lead-card:hover{ transform:none; } }
   .lead-card .role{
     font-size:12px; letter-spacing:1.2px; text-transform:uppercase;
     color: var(--gold-2); margin-bottom:8px; font-weight:700;
@@ -735,6 +740,7 @@
 <div class="lead-card">
 <div class="role">Fundador y líder del proyecto</div>
 <h3>Martín Cabrera</h3>
+<div class="chips"><span>18 años de scouting</span><span>Colorado Rockies</span><span>Scout del Año 2024</span></div>
 <p>Ex scout profesional con 18 años de experiencia en la organización Colorado Rockies. A lo largo de esa carrera firmó y desarrolló numerosos prospectos que llegaron al béisbol profesional afiliado.</p>
 <p>Hoy está totalmente enfocado en Cabrera Elite Baseball Development, un proyecto creado para ayudar a jóvenes atletas a crecer y alcanzar su máximo potencial en sus carreras deportivas mediante un entrenamiento diario y estructurado.</p>
 <div class="cert-row">
@@ -745,6 +751,7 @@
 <div class="lead-card">
 <div class="role">Fundador y preparador físico</div>
 <h3>Jesús Cabrera</h3>
+<div class="chips"><span>Certificado ISSA</span><span>Fuerza y acondicionamiento</span><span>Prevención de lesiones</span></div>
 <p>Preparador físico certificado por ISSA, responsable del trabajo de fuerza, acondicionamiento y prevención de lesiones incluido en el programa de cada atleta.</p>
 <div class="cert-row">
 <img alt="Certificado ISSA de Especialista en Fuerza y Acondicionamiento - Jesús Cabrera" decoding="async" height="538" loading="lazy" onclick="openCertLightbox(this.src)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCertLightbox(this.src)}" role="button" src="images/cert-issa-strength-conditioning.jpg" tabindex="0" width="700"/>
