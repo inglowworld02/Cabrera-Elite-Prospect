@@ -34,7 +34,7 @@ OTHER_PAGES = ['terms.html', 'waiver.html', '404.html', 'maintenance.html']
 NOINDEX_TWINS = {'store.html'}   # la tienda no se indexa hasta que tenga productos (ver GUIA_SITIO.md)
 
 ES_META = {
-    'index.html': ('Cabrera Elite Baseball Development — Entrenamiento de béisbol en Poinciana, FL',
+    'index.html': ('Entrenamiento de béisbol en Poinciana, FL | Cabrera Elite',
                    'Entrenamiento diario de béisbol en Poinciana, FL, dirigido por un ex scout de los Colorado Rockies. Bateo, pitcheo, defensa, fuerza y juego mental. Primera evaluación gratis.'),
     'register.html': ('Registro — Cabrera Elite Baseball Development',
                       'Registra a tu atleta, elige un plan y paga de forma segura con Stripe.'),
