@@ -19,6 +19,7 @@
 ## Contenido
 
 - [Vista previa](#vista-previa)
+- [Qué hace el sitio](#qué-hace-el-sitio)
 - [Tecnologías](#tecnologías)
 - [Cómo funciona](#cómo-funciona)
 - [1. Google Apps Script](#1-google-apps-script-codegs)
@@ -29,11 +30,34 @@
 
 ## Vista previa
 
-| Celular | Registro (paso 1 de 3) | Mi cuenta |
+| Celular (EN) | Celular (ES) | Mi cuenta |
 |:---:|:---:|:---:|
-| <img src="docs/img/home-mobile.jpg" alt="Portada en celular" width="200"> | <img src="docs/img/register-desktop.jpg" alt="Formulario de registro de atleta" width="360"> | <img src="docs/img/account-mobile.jpg" alt="Página Mi cuenta" width="200"> |
+| <img src="docs/img/home-mobile.jpg" alt="Portada en celular, inglés" width="200"> | <img src="docs/img/home-mobile-es.jpg" alt="Portada en celular, español" width="200"> | <img src="docs/img/account-mobile.jpg" alt="Página Mi cuenta" width="200"> |
+
+| Planes y selector «¿Qué plan me conviene?» | Registro (paso 1 de 3) |
+|:---:|:---:|
+| <img src="docs/img/plans-desktop.jpg" alt="Sección de planes con selector" width="430"> | <img src="docs/img/register-desktop.jpg" alt="Formulario de registro de atleta" width="430"> |
 
 > Las capturas muestran solo la interfaz; no incluyen fotos de atletas ni datos de familias.
+
+## Qué hace el sitio
+
+| Función | Cómo funciona | Archivos |
+|---|---|---|
+| **Portada orientada a conversión** | Un botón principal («Book Your Free Evaluation») y dos enlaces secundarios (registro y planes); barra de promoción y barra de confianza. | `index.html` |
+| **Evaluación gratis con waiver** | Formulario con firma, verificación anti-bot (Turnstile) y envío a Google Sheets; lo que falla la verificación queda en la hoja «Cuarentena». | `index.html`, `antibot.js`, `Code.gs` |
+| **Registro en 3 pasos** | Atleta → plan → pago en Stripe con referencia `CE-…` para conciliar el pago. | `register.html` |
+| **Selector de plan** | Botones por frecuencia semanal que señalan el plan correcto y abren el registro con ese plan preseleccionado. No cobra ni guarda datos. | `plan-finder.js` |
+| **Mi cuenta / portal del cliente** | Guía paso a paso y acceso al portal de Stripe (tarjeta, facturas, cancelación al final del mes pagado). El globo flotante lleva a esta página. | `account.html`, `account-bubble.js` |
+| **Chat con IA** | Worker de Cloudflare con Workers AI, límite por visitante y verificación Turnstile; si se agota la cuota muestra teléfono y correo. | `chat.js`, `chat-worker/` |
+| **Español e inglés** | Diccionario en `lang.js`; `tools/build_site.py` genera `es/` y el sitemap con `hreflang`. | `lang.js`, `tools/build_site.py` |
+| **Contenido opcional** | Video con avance, horario, reservas, tienda, testimonios y galería aparecen solo si se llenan en `site-config.js`. | `site-config.js`, `extras.js` |
+| **Animación sutil** | Revelado al desplazarse, contadores y paralaje; respeta `prefers-reduced-motion`. | `fx.js`, `bg.css` |
+| **Privacidad y cookies** | Google Analytics solo se carga tras aceptar cookies. Sentry sin datos personales. | `cookies.js`, `track.js`, `sentry-init.js` |
+| **SEO y descubrimiento** | `sitemap.xml`, `robots.txt`, JSON-LD, `llms.txt`, Open Graph y PWA manifest. | `sitemap.xml`, `llms.txt`, `manifest.webmanifest` |
+| **Seguridad** | CSP en cada página, cabeceras en Cloudflare (ver `docs/CABECERAS_CLOUDFLARE.md`), `tools/check_headers.sh` para comprobarlas. | `docs/`, `tools/` |
+
+> Los precios, el waiver y los textos legales están definidos por el negocio; este README los documenta, no los define.
 
 ## Tecnologías
 
@@ -85,6 +109,9 @@ Make  ◄── eventos de Stripe             • "Pagos sin registro": pagos qu
 | `tools/build_site.py` | Genera las páginas en español (`es/`), el sitemap y los bloques de seguridad |
 | `sentry-init.js` | Reporta errores del sitio a Sentry (sin datos personales) |
 | `site-config.js` | Único archivo que se edita para video, horario, reservas, tienda, testimonios, etc. |
+| `plan-finder.js`, `fx.js`, `extras.js`, `chat.js`, `cookies.js`, `track.js`, `antibot.js`, `account-bubble.js` | Scripts de interfaz y servicios (ver «Qué hace el sitio») |
+| `chat-worker/` | Worker de Cloudflare del chat (`LEEME.md` explica cómo moverlo o actualizarlo) |
+| `docs/` | Cabeceras de seguridad de Cloudflare y capturas de este README |
 | `Code.gs` | **No se sube a GitHub.** Se pega en Google Apps Script (ver abajo) |
 
 ## 1. Google Apps Script (`Code.gs`)
@@ -176,3 +203,17 @@ Cada evento envía un correo de aviso al correo del negocio configurado en el sc
 ## 5. Revisión final antes de cobrar (verificado en Stripe el 2026-10-10)
 - Payment Links en vivo con precios correctos ($50 / $280 / $400 / $600), redirección `register.html?pago=ok&plan=...` correcta e impuestos automáticos activos.
 - Portal del cliente activo: cancelación al final del período y enlace igual al de `lang.js`. "Cambiar de plan" está desactivado, así que la ruta *plan_changed* de Make NO es necesaria.
+
+## 6. Desarrollo local y comprobaciones
+
+```bash
+python3 -m http.server 8765        # servir el sitio en http://localhost:8765
+python3 tools/build_site.py        # regenerar es/ y sitemap.xml tras cambiar HTML o lang.js
+bash tools/check_headers.sh        # revisar cabeceras de seguridad en producción
+```
+
+Antes de subir cambios: probar en celular (≈390 px) y escritorio, en EN y ES, con y sin cookies aceptadas, y confirmar que los pagos se verifican en Stripe (no solo en la pantalla del navegador).
+
+## 7. Herramientas de agentes (opcional)
+
+Para trabajar este repo con Claude Code o Codex hay una guía reutilizable en `AGENTS.md` y un instalador de skills de animación y diseño en `SKILLS-INSTALL.md`. El sitio actual no depende de GSAP ni three.js: `fx.js` cubre las animaciones sin dependencias.

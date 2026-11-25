@@ -129,12 +129,18 @@
   // ---------- Weekly schedule + booking button ----------
   function renderSchedule(){
     var rows=(C.schedule||[]).filter(function(x){ return pick(x,'day'); });
-    var list=document.getElementById('ceScheduleList');
-    if(list){ list.textContent=''; rows.forEach(function(x){
-      var r=el('div','sched-row'); r.appendChild(el('b','',pick(x,'day')));
-      r.appendChild(el('span','sched-time',x.time||''));
-      var n=pick(x,'note'); if(n) r.appendChild(el('span','sched-note',n));
-      list.appendChild(r); }); list.hidden = rows.length===0; }
+    var list=document.getElementById('ceScheduleList'), hrs=document.getElementById('ceBookHours');
+    var times=rows.map(function(x){ return x.time||''; });
+    var same=rows.length>1 && times.every(function(t){ return t===times[0]; }) && !rows.some(function(x){ return pick(x,'note'); });
+    if(list){ list.textContent=''; list.classList.toggle('chips',same);
+      rows.forEach(function(x){
+        if(same){ list.appendChild(el('span','sched-chip',pick(x,'day'))); return; }
+        var r=el('div','sched-row'); r.appendChild(el('b','',pick(x,'day')));
+        r.appendChild(el('span','sched-time',x.time||''));
+        var n=pick(x,'note'); if(n) r.appendChild(el('span','sched-note',n));
+        list.appendChild(r); });
+      list.hidden = rows.length===0; }
+    if(hrs){ hrs.hidden=!same; if(same) hrs.textContent=(lang()==='es'?'Horario: ':'Hours: ')+times[0]; }
     var ok=safeUrl(C.bookingUrl);
     document.querySelectorAll('[data-ce="booking"]').forEach(function(a){
       if(ok){ a.href=C.bookingUrl; a.hidden=false; } else a.hidden=true;

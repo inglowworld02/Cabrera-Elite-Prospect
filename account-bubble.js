@@ -11,7 +11,13 @@ function lang(){
   var l=null;try{l=localStorage.getItem('ce_lang');}catch(e){}
   return l==='es'?'es':'en';
 }
-function getMin(){try{return localStorage.getItem('ce_acc_bubble')==='min';}catch(e){return false;}}
+/* The open bubble covers the hero links (bottom-left), so it starts as the small round button
+   unless the visitor already chose (stored value 'min' or '' = opened on purpose). */
+function getMin(){
+  var v=null;try{v=localStorage.getItem('ce_acc_bubble');}catch(e){}
+  if(v===null)return true;
+  return v==='min';
+}
 function setMin(v){try{localStorage.setItem('ce_acc_bubble',v?'min':'');}catch(e){}}
 
 var st=document.createElement('style');
@@ -41,7 +47,9 @@ st.textContent=
 '@keyframes ceAccPop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}'+
 '@keyframes ceAccRing{0%{opacity:.8;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.6)}}'+
 '@media (prefers-reduced-motion:reduce){#ceAcc .bub,#ceAcc .dot,#ceAcc .dot::after{animation:none}#ceAcc .bub,#ceAcc b i{transition:none}}'+
-'@media (max-width:520px){#ceAcc{left:10px;bottom:62px}#ceAcc .bub{max-width:calc(100vw - 84px);border-radius:14px 14px 14px 4px}#ceAcc .go{padding:8px 4px 8px 11px}#ceAcc b{font-size:12.5px}#ceAcc span.sub{font-size:11px}#ceAcc .dot{width:44px;height:44px}}';
+/* mientras el aviso de cookies está abierto, la burbuja se oculta para no quedar tapada */
+'body:has(#ceCookie[style*="display: block"]) #ceAcc{visibility:hidden}'+
+'@media (max-width:520px){#ceAcc{left:10px;bottom:62px}#ceAcc .bub{max-width:calc(100vw - 84px);border-radius:14px 14px 14px 4px}#ceAcc .go{padding:8px 4px 8px 11px}#ceAcc b{font-size:12.5px}#ceAcc span.sub{font-size:11px}#ceAcc .dot{width:44px;height:44px}#ceAcc.late{opacity:0;pointer-events:none;transition:opacity .2s}#ceAcc.late.show{opacity:1;pointer-events:auto}}';
 document.head.appendChild(st);
 
 var box=document.createElement('div');box.id='ceAcc';
@@ -67,5 +75,11 @@ dot.addEventListener('click',function(){setMin(false);apply(false);});
 a.addEventListener('click',function(){ if(window.ceTrack) window.ceTrack('account_bubble'); });
 paint();apply(getMin());
 document.body.appendChild(box);
+// Phones: the first screen is all hero + CTAs, so the button only appears after the visitor scrolls.
+if(window.matchMedia&&matchMedia('(max-width:520px)').matches){
+  box.classList.add('late');
+  var onS=function(){box.classList.toggle('show',(window.scrollY||0)>500);};
+  window.addEventListener('scroll',onS,{passive:true});onS();
+}
 window.addEventListener('langchange',paint);
 })();

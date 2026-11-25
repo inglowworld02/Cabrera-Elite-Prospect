@@ -17,7 +17,7 @@
   if(reduce)return;
   de.classList.add('js-fx');
   // texto del hero entra por líneas
-  d.querySelectorAll('.hero-eyebrow,.hero-free,h1.hero-title,.hero p.lead,.hero-actions').forEach(function(el,i){el.classList.add('hl');el.style.setProperty('--d',(.1+i*.14)+'s')});
+  d.querySelectorAll('.hero-eyebrow,.hero-free,h1.hero-title,.hero p.lead,.hero-meta,.hero-actions').forEach(function(el,i){el.classList.add('hl');el.style.setProperty('--d',(.1+i*.14)+'s')});
   // reveals con escalonado
   var sel=['.section-head','.trust .wrap>div','.program','.player','.plan-card','.about .wrap>*','.faq details','.location .wrap>*','.free-eval .wrap>*','.safety .wrap>*','.cta-band .wrap>*','.team .wrap>*'];
   var seen=new Set();

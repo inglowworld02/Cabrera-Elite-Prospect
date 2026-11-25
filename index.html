@@ -42,7 +42,7 @@
 <meta name="description" content="Cabrera Elite Baseball Development — daily baseball training in Poinciana, FL, led by a former Colorado Rockies scout.">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SportsActivityLocation", "name": "Cabrera Elite Baseball Development", "url": "https://cabreraelite.com/", "logo": "https://cabreraelite.com/og-image.jpg", "image": "https://cabreraelite.com/og-image.jpg", "description": "Daily baseball training in Poinciana, FL, led by a former Colorado Rockies scout.", "telephone": "+1-863-268-9210", "email": "info@cabreraelite.com", "openingHoursSpecification": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "16:30", "closes": "18:30"}, "areaServed": {"@type": "City", "name": "Poinciana, FL"}, "address": {"@type": "PostalAddress", "addressLocality": "Poinciana", "addressRegion": "FL", "addressCountry": "US"}, "founder": [{"@type": "Person", "name": "Martín Cabrera"}, {"@type": "Person", "name": "Jesús Cabrera"}], "sameAs": ["https://www.instagram.com/cabreraelitebaseball/", "https://www.tiktok.com/@cabrera.elite.pro"]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What should my athlete bring?", "acceptedAnswer": {"@type": "Answer", "text": "Their practice gear, water, and a positive mindset to train."}}, {"@type": "Question", "name": "What ages do you accept?", "acceptedAnswer": {"@type": "Answer", "text": "Athletes 7 years old and older."}}, {"@type": "Question", "name": "Where do sessions take place?", "acceptedAnswer": {"@type": "Answer", "text": "Sessions take place in Poinciana, FL. Use the \"Get Directions\" button in the Find us section to open the map."}}, {"@type": "Question", "name": "What are the training hours?", "acceptedAnswer": {"@type": "Answer", "text": "Training hours are 4:30 – 6:30 pm. Your athlete's days are scheduled with the coaching staff."}}, {"@type": "Question", "name": "How does the free evaluation work?", "acceptedAnswer": {"@type": "Answer", "text": "Every new athlete gets a free first evaluation before choosing a plan. Fill out the evaluation form and we will contact you to schedule a day."}}, {"@type": "Question", "name": "What happens if the weather is bad?", "acceptedAnswer": {"@type": "Answer", "text": "We may cancel or reschedule a session for weather, safety or staff reasons. Cancelled sessions are rescheduled or credited."}}, {"@type": "Question", "name": "Who can register an athlete?", "acceptedAnswer": {"@type": "Answer", "text": "A parent or legal guardian must register any athlete under 18. Athletes 18 or older register on their own behalf."}}, {"@type": "Question", "name": "Do unused sessions roll over?", "acceptedAnswer": {"@type": "Answer", "text": "No. Unused monthly sessions do not roll over to the next month."}}, {"@type": "Question", "name": "How do I cancel a monthly plan?", "acceptedAnswer": {"@type": "Answer", "text": "You can cancel any time from the customer portal (the \"Manage membership\" link in the footer) or by emailing us before your next billing date. Cancelling takes effect at the end of the paid month."}}, {"@type": "Question", "name": "Do you offer refunds?", "acceptedAnswer": {"@type": "Answer", "text": "All sales are final. Please read our Refund Policy for details on cancellations, rescheduling a Single Practice and credits."}}]}</script>
-<title>Cabrera Elite Baseball Development — Baseball Training in Poinciana, FL</title>
+<title>Baseball Training in Poinciana, FL | Cabrera Elite</title>
 <link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
@@ -129,7 +129,7 @@
       order:3; width:100%; gap:20px; overflow-x:auto; white-space:nowrap;
       padding-bottom:2px; -webkit-overflow-scrolling:touch;
     }
-    .nav-links a{ padding:4px 0; }
+    .nav-links a{ padding:12px 0; }
   }
 
   /* ---------- HERO ---------- */
@@ -166,7 +166,12 @@
     max-width: 480px;
     margin: 0 0 30px;
   }
+  .hero-meta{ font-size:13.5px; letter-spacing:.2px; color:rgba(241,238,228,.62); margin:-14px 0 24px; }
   .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+  /* un solo botón principal; registro y planes quedan como enlaces secundarios */
+  .hero-links{ flex-basis:100%; display:flex; flex-wrap:wrap; gap:0 26px; }
+  .hero-links a{ color:var(--cream); font-weight:600; font-size:14.5px; text-decoration:underline; text-decoration-color:rgba(241,238,228,.4); text-underline-offset:5px; min-height:44px; display:inline-flex; align-items:center; }
+  .hero-links a:hover{ color:var(--gold-2); text-decoration-color:var(--gold); }
   .btn{
     display:inline-block;
     font-weight:700;
@@ -231,6 +236,11 @@
     border-radius: 6px;
     padding: 28px 26px;
   }
+  .lead-card{ transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+  .lead-card:hover{ transform: translateY(-4px); border-color: rgba(212,175,55,.55); box-shadow: 0 14px 34px rgba(0,0,0,.35); }
+  .chips{ display:flex; gap:8px; flex-wrap:wrap; margin:0 0 16px; }
+  .chips span{ font-size:11.5px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color: var(--gold-2); border:1px solid rgba(212,175,55,.4); border-radius:999px; padding:5px 11px; }
+  @media (prefers-reduced-motion: reduce){ .lead-card{ transition:none; } .lead-card:hover{ transform:none; } }
   .lead-card .role{
     font-size:12px; letter-spacing:1.2px; text-transform:uppercase;
     color: var(--gold-2); margin-bottom:8px; font-weight:700;
@@ -498,7 +508,7 @@
   .loc-contact small{ display:block; font-size:11px; letter-spacing:1.2px; text-transform:uppercase; color: rgba(241,238,228,0.5); margin-bottom:2px; }
   .loc-contact span{ font-size:15px; word-break:break-word; }
   .promo-bar{ background:var(--gold); color:var(--ink); text-align:center; padding:9px 14px; font-weight:700; font-size:14px; }
-  .promo-bar a{ color:var(--ink); text-decoration:underline; margin-left:8px; white-space:nowrap; }
+  .promo-bar a{ color:var(--ink); text-decoration:underline; margin-left:8px; white-space:nowrap; padding:10px 6px; }
   .hero-free{ display:inline-block; background:rgba(201,161,90,.14); border:1px solid var(--gold); color:var(--gold-2); padding:9px 16px; border-radius:999px; font-weight:700; font-size:14px; margin:0 0 20px; }
   .free-banner{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; background:linear-gradient(135deg,var(--purple-deep),var(--ink-2)); border:2px solid var(--gold); border-radius:14px; padding:26px 28px; margin-bottom:34px; }
   .free-banner h3{ font-family:'Bebas Neue',Impact,'Arial Narrow',sans-serif; font-size:clamp(28px,5vw,40px); margin:0 0 6px; color:var(--gold-2); letter-spacing:.5px; }
@@ -626,6 +636,19 @@
   .sched-time{ font-size:14.5px; }
   .sched-note{ font-size:12.5px; color:rgba(241,238,228,0.6); }
   .ce-sched .btn{ display:inline-flex; }
+  .book-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:22px; align-items:stretch; }
+  .book-days,.book-card{ border:1px solid var(--line); border-radius:12px; padding:24px; background:rgba(241,238,228,0.03); }
+  .book-card{ border-color:rgba(228,192,124,.4); background:rgba(201,161,90,.07); display:flex; flex-direction:column; gap:12px; }
+  .book-days h3,.book-card h3{ margin:0 0 14px; font:400 28px/1 'Bebas Neue',Impact,sans-serif; letter-spacing:.5px; color:var(--gold-2); }
+  .book-card h3{ margin:0; }
+  .book-card p{ margin:0; font-size:14.5px; color:rgba(241,238,228,.78); }
+  .book-card .btn{ align-self:flex-start; margin-top:4px; }
+  .book-card .book-alt{ font-size:13px; color:rgba(241,238,228,.6); margin-top:auto; padding-top:8px; }
+  .book-card .book-alt a{ color:var(--gold-2); }
+  .sched-list.chips{ display:flex; flex-wrap:wrap; gap:10px; margin:0 0 14px; }
+  .sched-chip{ border:1px solid rgba(228,192,124,.45); color:var(--gold-2); border-radius:999px; padding:9px 16px; font-weight:700; font-size:14px; background:rgba(11,10,15,.35); }
+  .book-hours{ margin:0; font-size:15px; color:var(--cream); }
+  @media (max-width:860px){ .book-grid{ grid-template-columns:1fr; } .book-card .btn{ align-self:stretch; } }
   /* Hero en una columna en pantallas pequeñas */
   @media (max-width:860px){
     .hero{ padding:44px 0 56px; }
@@ -676,10 +699,13 @@
       <div class="hero-free">First Evaluation 100% FREE</div>
       <h1 class="hero-title display">EVERY REP<br>BUILDS A<br>PROSPECT.</h1>
       <p class="lead">Cabrera Elite Baseball Development is a daily training program for ballplayers who want to get better on purpose — hitting, pitching, defense, and the mental game, coached one rep at a time.</p>
+      <div class="hero-meta">Poinciana, FL · Ages 7+ · Led by a former Colorado Rockies scout</div>
       <div class="hero-actions">
         <a class="btn btn-gold" href="#free-evaluation">Book Your Free Evaluation →</a>
-        <a class="btn btn-outline" href="register.html">Start Registration →</a>
-        <a class="btn btn-outline" href="#plans">View Plans</a>
+        <div class="hero-links">
+          <a href="register.html">Start Registration →</a>
+          <a href="#plans">View Plans</a>
+        </div>
       </div>
     </div>
     <div class="hero-plate">
@@ -722,6 +748,7 @@
       <div class="lead-card">
         <div class="role">Founder &amp; Project Leader</div>
         <h3>Martín Cabrera</h3>
+        <div class="chips"><span>18 years scouting</span><span>Colorado Rockies</span><span>2024 Scout of the Year</span></div>
         <p>Former professional scout with 18 years of experience working for the Colorado Rockies organization. Over that career, he signed and developed numerous prospects who went on to reach affiliated professional baseball.</p>
         <p>Today he is fully focused on Cabrera Elite Baseball Development, a project built to help young athletes grow and reach their full potential in their athletic careers through structured, day-to-day training.</p>
         <div class="cert-row">
@@ -733,6 +760,7 @@
       <div class="lead-card">
         <div class="role">Founder &amp; Physical Trainer</div>
         <h3>Jesús Cabrera</h3>
+        <div class="chips"><span>ISSA certified</span><span>Strength &amp; conditioning</span><span>Injury prevention</span></div>
         <p>ISSA-certified physical trainer responsible for the strength, conditioning, and injury-prevention work built into every athlete's program.</p>
         <div class="cert-row">
           <img loading="lazy" decoding="async" width="700" height="538" src="images/cert-issa-strength-conditioning.jpg" alt="ISSA Specialist in Strength and Conditioning certificate - Jesús Cabrera" tabindex="0" role="button" onclick="openCertLightbox(this.src)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCertLightbox(this.src)}">
@@ -854,7 +882,7 @@
           <input type="text" id="evSig" required autocomplete="off" minlength="3" placeholder="Full legal name of parent/guardian (or athlete if 18+)">
           <p class="sig-warn" id="evSigWarn">The signature should match the parent/guardian name entered above.</p>
           <div id="evCap" style="margin-top:14px"></div>
-          <button type="submit" class="btn btn-gold" id="evBtn" style="margin-top:20px;">Send request →</button>
+          <button type="submit" class="btn btn-gold" id="evBtn" style="margin-top:20px;">Book My Free Evaluation →</button>
           <p class="eval-msg" id="evMsg"></p>
         </form>
         <p class="fe-alt">Prefer to talk? Call <a href="tel:+18632689210">+1 (863) 268-9210</a>.</p>
@@ -949,8 +977,19 @@
       <h2>Schedule &amp; booking</h2>
       <p>Training hours: 4:30 – 6:30 pm. Pick a day for your free evaluation.</p>
     </div>
-    <div class="sched-list" id="ceScheduleList" hidden></div>
-    <a class="btn btn-gold" data-ce="booking" href="#" target="_blank" rel="noopener" hidden>Book your free evaluation →</a>
+    <div class="book-grid">
+      <div class="book-days">
+        <h3>Training days</h3>
+        <div class="sched-list" id="ceScheduleList" hidden></div>
+        <p class="book-hours" id="ceBookHours" hidden></p>
+      </div>
+      <div class="book-card">
+        <h3>Free evaluation</h3>
+        <p>Choose a day and time that works for your family. There is no payment to book.</p>
+        <a class="btn btn-gold" data-ce="booking" href="#" target="_blank" rel="noopener" hidden>Book your free evaluation →</a>
+        <p class="book-alt"><span>Prefer not to pick a time now?</span> <a href="#free-evaluation">Send us a request</a> <span>or</span> <a href="https://wa.me/18632689210" target="_blank" rel="noopener">message us on WhatsApp</a>.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1206,16 +1245,16 @@
         msg.className = 'eval-msg ok';
         msg.textContent = T('Thank you! We received your request and will contact you soon to schedule the evaluation.');
         if(window.ceAfterEval) ceAfterEval(msg);
-        form.reset(); updateMinor(); btn.textContent = T('Send request →'); btn.disabled = false;
+        form.reset(); updateMinor(); btn.textContent = T('Book My Free Evaluation →'); btn.disabled = false;
         if(window.gtag) gtag('event', 'generate_lead', { form: 'free_evaluation' });
       }).catch(function(){
         cap.reset();
         msg.className = 'eval-msg err';
         msg.textContent = T("We couldn't send your request. Please call +1 (863) 268-9210 or email info@cabreraelite.com.");
-        btn.textContent = T('Send request →'); btn.disabled = false;
+        btn.textContent = T('Book My Free Evaluation →'); btn.disabled = false;
       });
     });
-    window.addEventListener('langchange', function(){ if(!btn.disabled) btn.textContent = T('Send request →'); });
+    window.addEventListener('langchange', function(){ if(!btn.disabled) btn.textContent = T('Book My Free Evaluation →'); });
   })();
 </script>
 
