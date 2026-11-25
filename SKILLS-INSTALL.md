@@ -170,3 +170,11 @@ for s in theme-factory brand-guidelines; do cp -r anthropic-skills/skills/$s $D/
 | Contenido y SEO | mk-copywriting, mk-copy-editing, mk-seo-audit, mk-schema, mk-site-architecture | marketingskills (MIT) |
 
 El repo `marketingskills` tiene muchas más (ads, pricing, email, referrals…); se pueden añadir igual. No instalado: Mailerfind (herramienta de captación de correos de negocios; promo con «comenta CLIENTES») y `voice-jcb/content-studio` (no verificado). Los nombres «page-cro», «humanise-text» y «security-review» del video no existen con ese nombre en estos repos; el equivalente de page-cro es `cro`.
+
+## 9. Videos revisados 2026-11-25 (NO instalados)
+| Video | Qué es | Decisión |
+|---|---|---|
+| 9 repos de GitHub que reemplazan software de pago | Postiz, CosyVoice, Ghost, AFFiNE, OpenWhispr, Plane, Twenty (7 de 9 vistos) | No instalar: son servicios que hay que alojar. Útiles a futuro: Postiz (redes) y Twenty (CRM). Verificar licencia y repo antes. |
+| REA (`morluto/rea`) | Ingeniería inversa asistida por IA | No instalar: no aporta a la web. Solo en entorno aislado y con revisión. |
+| Lemo Opuscar (`lemomo-ai/lemo-opuscar`) | Plugin de Claude Code para videos animados (98 estilos) | Pendiente: solo visto en capturas. Revisar código del repo antes de instalar. |
+Regla: no ejecutar `curl | sh` ni instalar plugins sin leer su código.

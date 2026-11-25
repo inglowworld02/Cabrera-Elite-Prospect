@@ -49,7 +49,7 @@ st.textContent=
 '@media (prefers-reduced-motion:reduce){#ceAcc .bub,#ceAcc .dot,#ceAcc .dot::after{animation:none}#ceAcc .bub,#ceAcc b i{transition:none}}'+
 /* mientras el aviso de cookies está abierto, la burbuja se oculta para no quedar tapada */
 'body:has(#ceCookie[style*="display: block"]) #ceAcc{visibility:hidden}'+
-'@media (max-width:520px){#ceAcc{left:10px;bottom:62px}#ceAcc .bub{max-width:calc(100vw - 84px);border-radius:14px 14px 14px 4px}#ceAcc .go{padding:8px 4px 8px 11px}#ceAcc b{font-size:12.5px}#ceAcc span.sub{font-size:11px}#ceAcc .dot{width:44px;height:44px}}';
+'@media (max-width:520px){#ceAcc{left:10px;bottom:62px}#ceAcc .bub{max-width:calc(100vw - 84px);border-radius:14px 14px 14px 4px}#ceAcc .go{padding:8px 4px 8px 11px}#ceAcc b{font-size:12.5px}#ceAcc span.sub{font-size:11px}#ceAcc .dot{width:44px;height:44px}#ceAcc.late{opacity:0;pointer-events:none;transition:opacity .2s}#ceAcc.late.show{opacity:1;pointer-events:auto}}';
 document.head.appendChild(st);
 
 var box=document.createElement('div');box.id='ceAcc';
@@ -75,5 +75,11 @@ dot.addEventListener('click',function(){setMin(false);apply(false);});
 a.addEventListener('click',function(){ if(window.ceTrack) window.ceTrack('account_bubble'); });
 paint();apply(getMin());
 document.body.appendChild(box);
+// Phones: the first screen is all hero + CTAs, so the button only appears after the visitor scrolls.
+if(window.matchMedia&&matchMedia('(max-width:520px)').matches){
+  box.classList.add('late');
+  var onS=function(){box.classList.toggle('show',(window.scrollY||0)>500);};
+  window.addEventListener('scroll',onS,{passive:true});onS();
+}
 window.addEventListener('langchange',paint);
 })();
