@@ -631,6 +631,19 @@
   .sched-time{ font-size:14.5px; }
   .sched-note{ font-size:12.5px; color:rgba(241,238,228,0.6); }
   .ce-sched .btn{ display:inline-flex; }
+  .book-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:22px; align-items:stretch; }
+  .book-days,.book-card{ border:1px solid var(--line); border-radius:12px; padding:24px; background:rgba(241,238,228,0.03); }
+  .book-card{ border-color:rgba(228,192,124,.4); background:rgba(201,161,90,.07); display:flex; flex-direction:column; gap:12px; }
+  .book-days h3,.book-card h3{ margin:0 0 14px; font:400 28px/1 'Bebas Neue',Impact,sans-serif; letter-spacing:.5px; color:var(--gold-2); }
+  .book-card h3{ margin:0; }
+  .book-card p{ margin:0; font-size:14.5px; color:rgba(241,238,228,.78); }
+  .book-card .btn{ align-self:flex-start; margin-top:4px; }
+  .book-card .book-alt{ font-size:13px; color:rgba(241,238,228,.6); margin-top:auto; padding-top:8px; }
+  .book-card .book-alt a{ color:var(--gold-2); }
+  .sched-list.chips{ display:flex; flex-wrap:wrap; gap:10px; margin:0 0 14px; }
+  .sched-chip{ border:1px solid rgba(228,192,124,.45); color:var(--gold-2); border-radius:999px; padding:9px 16px; font-weight:700; font-size:14px; background:rgba(11,10,15,.35); }
+  .book-hours{ margin:0; font-size:15px; color:var(--cream); }
+  @media (max-width:860px){ .book-grid{ grid-template-columns:1fr; } .book-card .btn{ align-self:stretch; } }
   /* Hero en una columna en pantallas pequeñas */
   @media (max-width:860px){
     .hero{ padding:44px 0 56px; }
@@ -941,8 +954,19 @@
 <h2>Horario y reservas</h2>
 <p>Horario de entrenamiento: 4:30 – 6:30 pm. Elige un día para tu evaluación gratis.</p>
 </div>
+<div class="book-grid">
+<div class="book-days">
+<h3>Días de entrenamiento</h3>
 <div class="sched-list" hidden="" id="ceScheduleList"></div>
+<p class="book-hours" hidden="" id="ceBookHours"></p>
+</div>
+<div class="book-card">
+<h3>Evaluación gratis</h3>
+<p>Elige el día y la hora que mejor le convenga a tu familia. Reservar no tiene costo.</p>
 <a class="btn btn-gold" data-ce="booking" hidden="" href="/es/#" rel="noopener" target="_blank">Reserva tu evaluación gratis →</a>
+<p class="book-alt">Prefer not to pick a time now? <a href="/es/#free-evaluation">Envíanos una solicitud</a> or <a href="https://wa.me/18632689210" rel="noopener" target="_blank">escríbenos por WhatsApp</a>.</p>
+</div>
+</div>
 </div>
 </section>
 <section class="plans-sec" id="plans">
