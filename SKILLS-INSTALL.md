@@ -146,3 +146,27 @@ Los repos existen (comprobado con `git ls-remote`); licencia y estrellas son lo 
 - *GODMODE* (`elder-plinius/GODMODE3`): un `index.html` que reúne 50+ modelos. NO instalar: pide claves de API en una página de un tercero y el autor es conocido por jailbreaks.
 - *Higgsfield × Claude*: conector MCP de video con prueba gratis, promocional (pide comentar para recibir el enlace). Opcional; se agrega desde Configuración → Conectores; no hace falta para el sitio.
 - *«Motion Graphics Skill File»* (getuninside.com): archivo promocional detrás de «comenta SKILL»; no verificable. Ya existe `motion-design` verificada.
+
+## 8. Skills de diseño y conversión (video «42 skills en 6 capas», 2026-11-24)
+
+Verificadas por clonado: sin scripts ejecutables ni patrones de riesgo (`curl | sh`, `sudo`, `eval`, `base64 -d`). Licencias: MIT y Apache-2.0.
+
+```bash
+git clone --depth 1 https://github.com/coreyhaines31/marketingskills.git
+git clone --depth 1 https://github.com/wondelai/skills.git wondelai-skills
+git clone --depth 1 https://github.com/anthropics/skills.git anthropic-skills
+D=~/.agents/skills   # Codex;  usar ~/.claude/skills para Claude Code
+mkdir -p $D
+for s in cro onboarding copywriting copy-editing seo-audit schema site-architecture signup; do cp -r marketingskills/skills/$s $D/mk-$s; done
+for s in top-design create-website improve-website conversion-optimization; do cp -r wondelai-skills/$s $D/wd-$s; done
+for s in theme-factory brand-guidelines; do cp -r anthropic-skills/skills/$s $D/; done
+```
+
+| Capa | Skills instaladas | Fuente |
+|---|---|---|
+| Frontend y UI | wd-top-design, wd-create-website, wd-improve-website, `frontend-design` (ya incluida) | wondelai/skills, anthropics/skills |
+| Imagen / identidad | theme-factory, brand-guidelines | anthropics/skills (Apache-2.0) |
+| Producto y conversión | mk-cro, mk-onboarding, mk-signup, wd-conversion-optimization | marketingskills (MIT), wondelai (MIT) |
+| Contenido y SEO | mk-copywriting, mk-copy-editing, mk-seo-audit, mk-schema, mk-site-architecture | marketingskills (MIT) |
+
+El repo `marketingskills` tiene muchas más (ads, pricing, email, referrals…); se pueden añadir igual. No instalado: Mailerfind (herramienta de captación de correos de negocios; promo con «comenta CLIENTES») y `voice-jcb/content-studio` (no verificado). Los nombres «page-cro», «humanise-text» y «security-review» del video no existen con ese nombre en estos repos; el equivalente de page-cro es `cro`.
